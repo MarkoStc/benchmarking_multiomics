@@ -1,0 +1,44 @@
+# ---- large / generated artifacts (never commit) ----
+# Per-model experiment outputs (fitted fold_models, metadata, fold_results, ...)
+results/
+*/results/
+results_*/
+*/results_*/
+
+# Input datasets (multi-GB TCGA matrices)
+data/
+*/data/
+
+# Stage-1 harvested shards (large intermediate pickles)
+report/canonical/
+
+# SLURM + run logs
+logs/
+*/logs/
+*.out
+*.err
+*.log
+
+# Daemon state
+*.state
+
+# Model / data blobs
+*.joblib
+*.pkl
+*.pkl.gz
+*.pt
+*.pth
+*.npy
+*.npz
+*.h5
+*.hdf5
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# ---- deliverables we DO keep ----
+# report/tables/ and report/figures/ are tracked (small CSVs / PNGs)
+!report/tables/
+!report/figures/

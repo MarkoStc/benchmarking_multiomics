@@ -1,0 +1,1 @@
+python run_nomics.py --dataset-path /work/scitas-share/FellayMultiOmic/code/full-test-pipeline/data/processed/TCGA-BRCA.joblib --align-epochs 1000 --finetune-epochs 1000 --outer-splits 5 --omics cnv --mode unsupervised --neighbor-size 20 --embedding-dims 64 --k-per-omic 100 --lr-C 10.0 --include-non-intersection-frac 1.0 --random-state 1 --output-root results/TCGA-BRCA/nomics

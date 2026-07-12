@@ -1,0 +1,94 @@
+{
+  "model": "IntegrAO",
+  "reference": "Ma et al., Nature Machine Intelligence 2025 — https://github.com/bowang-lab/IntegrAO",
+
+  "fixed_hps": {
+    "hidden_channels": 128,
+    "fusing_iteration": 20,
+    "mu": 0.5,
+    "normalization_factor": 1.0,
+    "note": "hidden_channels is hardcoded in IntegrAO's training loop; the rest follow paper defaults"
+  },
+
+  "searched_hps": {
+    "k_per_omic": [50, 100, 200],
+    "neighbor_size": [10, 20],
+    "embedding_dims": [32, 64],
+    "supervised_mode": {
+      "finetune_epochs": [1000],
+      "align_epochs": [1000]
+    },
+    "unsupervised_mode": {
+      "align_epochs": [1000],
+      "lr_C": [0.1, 1.0, 10.0]
+    },
+    "search_strategy": "external SLURM sweep — one job per HP combo; best HP selected post-hoc from results; no inner CV (GNN training too expensive)"
+  },
+
+  "evaluation_axes": {
+    "missing": {
+      "axis": "include_non_intersection_frac",
+      "values": [0.0, 0.25, 0.5, 0.75, 1.0],
+      "script": "run_missing.py",
+      "make_jobs": "make_hp_missing.sh"
+    },
+    "ratio": {
+      "axis": "ratio_per_omic",
+      "values": [0.01, 0.05, 0.1, 0.2, 0.5],
+      "script": "run_ratio.py",
+      "make_jobs": "make_hp_ratio.sh"
+    },
+    "nomics": {
+      "axis": "omic_subset",
+      "values": "all subsets of size 2..5 from [mrna, dnam, rppa, mirna, cnv]",
+      "script": "run_nomics.py",
+      "make_jobs": "make_hp_nomics.sh"
+    },
+    "npatients": {
+      "axis": "n_patients",
+      "values": [100, 200, 400],
+      "script": "run_npatients.py",
+      "make_jobs": "make_hp_npatients.sh"
+    }
+  },
+
+  "modes": {
+    "supervised": "End-to-end GNN classification fine-tuning on train patients; inductive inference on test patients via integrao_predictor",
+    "unsupervised": "Unsupervised GNN embedding on train patients; logistic regression on top; inductive embedding inference for test patients"
+  },
+
+  "cv": {
+    "outer_splits": 5,
+    "inner_splits": 3,
+    "note": "inner_splits declared for API compatibility but inner CV is NOT run for IntegrAO — HPs are swept externally"
+  },
+
+  "datasets": {
+    "TCGA-BRCA": "/work/scitas-share/FellayMultiOmic/svm_logreg/brca_real_multiomics.joblib",
+    "TCGA-LGG": "TODO: build lgg_real_multiomics.joblib from data/01_raw/TCGA-LGG/"
+  },
+
+  "omics": ["mrna", "dnam", "rppa", "mirna", "cnv"],
+
+  "slurm": {
+    "script": "slurm_integrao_array.sh",
+    "partition": "academic",
+    "time": "12:00:00",
+    "cpus_per_task": 4,
+    "mem": "32G",
+    "gpu": "optional — add --gres=gpu:1 to sbatch for faster GNN training"
+  },
+
+  "quickstart": [
+    "# 1. Generate smoke-test jobs (1 HP combo, 1 frac, supervised only)",
+    "bash make_hp_missing.sh  # edit to reduce grid first for smoke test",
+    "",
+    "# 2. Dry-run locally",
+    "python run_missing.py --dataset-path /work/scitas-share/FellayMultiOmic/svm_logreg/brca_real_multiomics.joblib --omics mrna,dnam,rppa --mode supervised --k-per-omic 50 --neighbor-size 10 --embedding-dims 32 --finetune-epochs 100 --align-epochs 100 --include-non-intersection-frac 0.0 --outer-splits 2 --output-root /tmp/integrao_smoke",
+    "",
+    "# 3. Full SLURM sweep",
+    "bash make_hp_missing.sh",
+    "N=$(wc -l < experiments_integrao_missing.txt)",
+    "sbatch --array=1-${N} slurm_integrao_array.sh experiments_integrao_missing.txt"
+  ]
+}
