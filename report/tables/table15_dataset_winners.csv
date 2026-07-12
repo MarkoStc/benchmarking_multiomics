@@ -1,0 +1,4 @@
+dataset,model,balanced_accuracy_mean,macro_f1_mean
+TCGA-BRCA,integrao,0.8516,0.828
+TCGA-KIPAN,logreg_late,0.9531,0.9374
+TCGA-LGG,logreg_late,0.6898,0.6853

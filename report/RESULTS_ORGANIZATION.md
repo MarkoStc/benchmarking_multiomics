@@ -128,8 +128,15 @@ Each table/figure filename maps to the corresponding numbered item in
 
 ```bash
 # Stage 1 (SLURM): reconstruct predictions + metrics for all 84 (model,dataset,axis) cells
-sbatch --array=1-84 report/slurm_harvest.sh      # -> report/canonical/*.pkl.gz
+sbatch --array=1-84 report/slurm_harvest.sh          # -> report/canonical/*.pkl.gz
 
-# Stage 2 (single node): aggregate into tables + figures
-python report/aggregate.py                       # -> report/tables/  report/figures/
+# Stage 2 (single node): aggregate into tables + figures.
+# Run in the `mofa` conda env: it has numpy 2.x + pyarrow, so it can read every
+# shard (mofa shards were written under numpy 2.x; the rest use Arrow-backed
+# string columns that need pyarrow). Safe to re-run any time; it uses whatever
+# shards are present and overwrites the tables/figures in place.
+conda run -n mofa python report/aggregate.py         # -> report/tables/  report/figures/
 ```
+
+Aggregation is robust to partial input — `report/STAGE2_MANIFEST.json` records which
+of the 84 cells were present in the last run.

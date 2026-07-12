@@ -1,0 +1,8 @@
+model,mean_balanced_accuracy,mean_macro_f1,mean_rank,n_datasets
+logreg_late,0.8271,0.8168,1.3333,3
+logreg_early,0.8096,0.8045,2.6667,3
+integrao,0.7915,0.7754,4.0,3
+pnet,0.788,0.7993,4.0,3
+pca_logreg,0.7939,0.787,4.6667,3
+mofa,0.6921,0.6635,5.6667,3
+svm_early,0.7786,0.76,5.6667,3

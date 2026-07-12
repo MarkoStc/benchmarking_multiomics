@@ -1,0 +1,389 @@
+{
+  "tables": [
+    "table02_main_model_performance.csv",
+    "table03_per_class_results.csv",
+    "table04_patient_count_sweep.csv",
+    "table05_best_combination_per_nomics.csv",
+    "table06_omic_combination_leaderboard.csv",
+    "table08_missingness_results.csv",
+    "table10_missingness_robustness.csv",
+    "table11_feature_sweep.csv",
+    "table13_feature_efficiency.csv",
+    "table14_cross_dataset_summary.csv",
+    "table15_dataset_winners.csv",
+    "table16_pairwise_comparisons.csv"
+  ],
+  "figures": [
+    "fig01_overall_balanced_accuracy.png",
+    "fig01_overall_macro_f1.png",
+    "fig02_perclass_f1_TCGA-BRCA.png",
+    "fig02_perclass_f1_TCGA-KIPAN.png",
+    "fig02_perclass_f1_TCGA-LGG.png",
+    "fig03_confusion_TCGA-BRCA.png",
+    "fig03_confusion_TCGA-KIPAN.png",
+    "fig03_confusion_TCGA-LGG.png",
+    "fig05_npatients_balanced_accuracy_TCGA-BRCA.png",
+    "fig05_npatients_balanced_accuracy_TCGA-KIPAN.png",
+    "fig05_npatients_balanced_accuracy_TCGA-LGG.png",
+    "fig05_npatients_macro_f1_TCGA-BRCA.png",
+    "fig05_npatients_macro_f1_TCGA-KIPAN.png",
+    "fig05_npatients_macro_f1_TCGA-LGG.png",
+    "fig08_best_nomics_balanced_accuracy_TCGA-BRCA.png",
+    "fig08_best_nomics_balanced_accuracy_TCGA-KIPAN.png",
+    "fig08_best_nomics_balanced_accuracy_TCGA-LGG.png",
+    "fig08_best_nomics_macro_f1_TCGA-BRCA.png",
+    "fig08_best_nomics_macro_f1_TCGA-KIPAN.png",
+    "fig08_best_nomics_macro_f1_TCGA-LGG.png",
+    "fig12_missing_balanced_accuracy_TCGA-BRCA.png",
+    "fig12_missing_balanced_accuracy_TCGA-KIPAN.png",
+    "fig12_missing_balanced_accuracy_TCGA-LGG.png",
+    "fig12_missing_macro_f1_TCGA-BRCA.png",
+    "fig12_missing_macro_f1_TCGA-KIPAN.png",
+    "fig12_missing_macro_f1_TCGA-LGG.png",
+    "fig16_features_balanced_accuracy_TCGA-BRCA.png",
+    "fig16_features_balanced_accuracy_TCGA-KIPAN.png",
+    "fig16_features_balanced_accuracy_TCGA-LGG.png",
+    "fig16_features_macro_f1_TCGA-BRCA.png",
+    "fig16_features_macro_f1_TCGA-KIPAN.png",
+    "fig16_features_macro_f1_TCGA-LGG.png",
+    "fig20_method_rank.png",
+    "fig22_performance_vs_cost.png"
+  ],
+  "cells_present": [
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "integrao",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "integrao",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "integrao",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "integrao",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "integrao",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "integrao",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_early",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_early",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_early",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_early",
+      "axis": "ratio"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_early",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_early",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_early",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_early",
+      "axis": "ratio"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_early",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_early",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_early",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_early",
+      "axis": "ratio"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_late",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_late",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_late",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "logreg_late",
+      "axis": "ratio"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_late",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_late",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_late",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "logreg_late",
+      "axis": "ratio"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_late",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_late",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_late",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "logreg_late",
+      "axis": "ratio"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "mofa",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "mofa",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "mofa",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "mofa",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "mofa",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "mofa",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "mofa",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "mofa",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "mofa",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "mofa",
+      "axis": "ratio"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "pca_logreg",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "pca_logreg",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "pca_logreg",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "pca_logreg",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "pca_logreg",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "pca_logreg",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "pca_logreg",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "pca_logreg",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "pca_logreg",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "pnet",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "pnet",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "pnet",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "pnet",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "pnet",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "pnet",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "pnet",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "pnet",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "pnet",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "svm_early",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "svm_early",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-BRCA",
+      "model": "svm_early",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "svm_early",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "svm_early",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "svm_early",
+      "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "svm_early",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "svm_early",
+      "axis": "nomics"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "svm_early",
+      "axis": "npatients"
+    }
+  ]
+}
