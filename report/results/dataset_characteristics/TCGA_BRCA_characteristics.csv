@@ -1,0 +1,6 @@
+dataset,prediction_target,class,class_count,class_percentage,total_eligible_patients,omic_name,raw_feature_count,observed_patients,complete_case_count
+TCGA-BRCA,molecular_subtype,0,562.0,53.88,1043.0,mrna,29995,1007,1007
+TCGA-BRCA,molecular_subtype,1,209.0,20.04,,dnam,200000,746,746
+TCGA-BRCA,molecular_subtype,2,190.0,18.22,,rppa,464,840,840
+TCGA-BRCA,molecular_subtype,3,82.0,7.86,,mirna,1601,978,978
+TCGA-BRCA,molecular_subtype,,,,,cnv,60265,1014,1014

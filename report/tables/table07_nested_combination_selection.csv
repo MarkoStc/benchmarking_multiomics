@@ -1,0 +1,2 @@
+dataset,method,selected_combination,outer_test_balanced_accuracy,outer_test_macro_f1,note
+,,,,,Nested (inner-fold) combination selection was not run as a separate protocol; the nomics axis evaluates every combination post-hoc (see table06). Populate by running a nested selection experiment.

@@ -1,0 +1,6 @@
+dataset,prediction_target,class,class_count,class_percentage,total_eligible_patients,omic_name,raw_feature_count,observed_patients,complete_case_count
+TCGA-LGG,molecular_subtype,1,241.0,52.74,457.0,mrna,22185,437,437
+TCGA-LGG,molecular_subtype,0,216.0,47.26,,dnam,321999,457,457
+TCGA-LGG,molecular_subtype,,,,,rppa,457,389,389
+TCGA-LGG,molecular_subtype,,,,,mirna,1515,408,408
+TCGA-LGG,molecular_subtype,,,,,cnv,60274,450,450

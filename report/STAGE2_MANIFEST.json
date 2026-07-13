@@ -1,53 +1,42 @@
 {
   "tables": [
+    "table01_dataset_characteristics.csv",
     "table02_main_model_performance.csv",
     "table03_per_class_results.csv",
     "table04_patient_count_sweep.csv",
-    "table05_best_combination_per_nomics.csv",
-    "table06_omic_combination_leaderboard.csv",
-    "table08_missingness_results.csv",
+    "table05_best_combination_by_n_omics.csv",
+    "table06_all_omic_combinations.csv",
+    "table07_nested_combination_selection.csv",
+    "table08_random_missingness.csv",
+    "table09_complete_omic_absence.csv",
     "table10_missingness_robustness.csv",
-    "table11_feature_sweep.csv",
+    "table11_feature_percentage_sweep.csv",
+    "table12_per_omic_feature_sensitivity.csv",
     "table13_feature_efficiency.csv",
     "table14_cross_dataset_summary.csv",
     "table15_dataset_winners.csv",
-    "table16_pairwise_comparisons.csv"
+    "table16_pairwise_comparisons.csv",
+    "table17_computational_cost.csv"
   ],
   "figures": [
-    "fig01_overall_balanced_accuracy.png",
-    "fig01_overall_macro_f1.png",
-    "fig02_perclass_f1_TCGA-BRCA.png",
-    "fig02_perclass_f1_TCGA-KIPAN.png",
-    "fig02_perclass_f1_TCGA-LGG.png",
-    "fig03_confusion_TCGA-BRCA.png",
-    "fig03_confusion_TCGA-KIPAN.png",
-    "fig03_confusion_TCGA-LGG.png",
-    "fig05_npatients_balanced_accuracy_TCGA-BRCA.png",
-    "fig05_npatients_balanced_accuracy_TCGA-KIPAN.png",
-    "fig05_npatients_balanced_accuracy_TCGA-LGG.png",
-    "fig05_npatients_macro_f1_TCGA-BRCA.png",
-    "fig05_npatients_macro_f1_TCGA-KIPAN.png",
-    "fig05_npatients_macro_f1_TCGA-LGG.png",
-    "fig08_best_nomics_balanced_accuracy_TCGA-BRCA.png",
-    "fig08_best_nomics_balanced_accuracy_TCGA-KIPAN.png",
-    "fig08_best_nomics_balanced_accuracy_TCGA-LGG.png",
-    "fig08_best_nomics_macro_f1_TCGA-BRCA.png",
-    "fig08_best_nomics_macro_f1_TCGA-KIPAN.png",
-    "fig08_best_nomics_macro_f1_TCGA-LGG.png",
-    "fig12_missing_balanced_accuracy_TCGA-BRCA.png",
-    "fig12_missing_balanced_accuracy_TCGA-KIPAN.png",
-    "fig12_missing_balanced_accuracy_TCGA-LGG.png",
-    "fig12_missing_macro_f1_TCGA-BRCA.png",
-    "fig12_missing_macro_f1_TCGA-KIPAN.png",
-    "fig12_missing_macro_f1_TCGA-LGG.png",
-    "fig16_features_balanced_accuracy_TCGA-BRCA.png",
-    "fig16_features_balanced_accuracy_TCGA-KIPAN.png",
-    "fig16_features_balanced_accuracy_TCGA-LGG.png",
-    "fig16_features_macro_f1_TCGA-BRCA.png",
-    "fig16_features_macro_f1_TCGA-KIPAN.png",
-    "fig16_features_macro_f1_TCGA-LGG.png",
-    "fig20_method_rank.png",
-    "fig22_performance_vs_cost.png"
+    "figures/main/fig01_overall_performance.png",
+    "figures/main/fig02_per_class_performance.png",
+    "figures/main/fig03_confusion_matrices.png",
+    "figures/main/fig05_metrics_vs_patients.png",
+    "figures/main/fig08_best_performance_vs_n_omics_balanced_accuracy.png",
+    "figures/main/fig08_best_performance_vs_n_omics_macro_f1.png",
+    "figures/main/fig09_best_combination_by_n_omics.png",
+    "figures/main/fig12_metrics_vs_missingness.png",
+    "figures/main/fig16_metrics_vs_feature_percentage.png",
+    "figures/supplementary/all_metrics/confusion_all_TCGA-BRCA.png",
+    "figures/supplementary/all_metrics/confusion_all_TCGA-KIPAN.png",
+    "figures/supplementary/all_metrics/confusion_all_TCGA-LGG.png",
+    "figures/supplementary/all_metrics/fig21_method_rank.png",
+    "figures/supplementary/all_omic_combinations/fig10_all_combinations.png",
+    "figures/supplementary/calibration/fig04_calibration.png",
+    "figures/supplementary/computational_cost/fig22_performance_vs_cost.png",
+    "figures/supplementary/learning_curve_stability/fig06_stability_vs_patients.png",
+    "figures/supplementary/missing_omic_identity/fig14_complete_omic_absence.png"
   ],
   "cells_present": [
     {
@@ -73,6 +62,11 @@
     {
       "dataset": "TCGA-LGG",
       "model": "integrao",
+      "axis": "missing"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "integrao",
       "axis": "nomics"
     },
     {
@@ -216,6 +210,11 @@
       "axis": "npatients"
     },
     {
+      "dataset": "TCGA-BRCA",
+      "model": "mofa",
+      "axis": "ratio"
+    },
+    {
       "dataset": "TCGA-KIPAN",
       "model": "mofa",
       "axis": "missing"
@@ -229,6 +228,11 @@
       "dataset": "TCGA-KIPAN",
       "model": "mofa",
       "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-KIPAN",
+      "model": "mofa",
+      "axis": "ratio"
     },
     {
       "dataset": "TCGA-LGG",
@@ -311,6 +315,11 @@
       "axis": "npatients"
     },
     {
+      "dataset": "TCGA-BRCA",
+      "model": "pnet",
+      "axis": "ratio"
+    },
+    {
       "dataset": "TCGA-KIPAN",
       "model": "pnet",
       "axis": "missing"
@@ -339,6 +348,11 @@
       "dataset": "TCGA-LGG",
       "model": "pnet",
       "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "pnet",
+      "axis": "ratio"
     },
     {
       "dataset": "TCGA-BRCA",
@@ -356,6 +370,11 @@
       "axis": "npatients"
     },
     {
+      "dataset": "TCGA-BRCA",
+      "model": "svm_early",
+      "axis": "ratio"
+    },
+    {
       "dataset": "TCGA-KIPAN",
       "model": "svm_early",
       "axis": "missing"
@@ -371,6 +390,11 @@
       "axis": "npatients"
     },
     {
+      "dataset": "TCGA-KIPAN",
+      "model": "svm_early",
+      "axis": "ratio"
+    },
+    {
       "dataset": "TCGA-LGG",
       "model": "svm_early",
       "axis": "missing"
@@ -384,6 +408,11 @@
       "dataset": "TCGA-LGG",
       "model": "svm_early",
       "axis": "npatients"
+    },
+    {
+      "dataset": "TCGA-LGG",
+      "model": "svm_early",
+      "axis": "ratio"
     }
   ]
 }

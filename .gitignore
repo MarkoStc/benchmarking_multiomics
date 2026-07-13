@@ -42,3 +42,10 @@ __pycache__/
 # report/tables/ and report/figures/ are tracked (small CSVs / PNGs)
 !report/tables/
 !report/figures/
+# report/results/ holds the aggregated per-experiment CSVs (small) — track them,
+# re-including the tree that the generic `results/` rule above excluded ...
+!report/results/
+!report/results/**
+# ... except the two large, fully regenerable dumps
+report/results/predictions/
+report/results/fold_metrics/

@@ -1,0 +1,2 @@
+dataset,method,omic,feature_fraction,balanced_accuracy,macro_f1,note
+,,,,,,"The feature-percentage axis is a JOINT sweep over all omics (all-5, single combination). A one-omic-at-a-time feature sweep was not run, so per-omic sensitivity cannot be derived from these results."

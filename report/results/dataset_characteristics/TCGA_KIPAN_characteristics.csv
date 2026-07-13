@@ -1,0 +1,6 @@
+dataset,prediction_target,class,class_count,class_percentage,total_eligible_patients,omic_name,raw_feature_count,observed_patients,complete_case_count
+TCGA-KIPAN,molecular_subtype,0,537.0,59.53,902.0,mrna,59427,822,822
+TCGA-KIPAN,molecular_subtype,1,291.0,32.26,,dnam,486426,542,542
+TCGA-KIPAN,molecular_subtype,2,74.0,8.2,,rppa,487,756,756
+TCGA-KIPAN,molecular_subtype,,,,,mirna,1881,811,811
+TCGA-KIPAN,molecular_subtype,,,,,cnv,59390,618,618

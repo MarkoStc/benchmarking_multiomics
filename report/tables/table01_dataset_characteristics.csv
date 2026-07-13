@@ -1,0 +1,16 @@
+dataset,prediction_target,class,class_count,class_percentage,total_eligible_patients,omic_name,raw_feature_count,observed_patients,complete_case_count
+TCGA-BRCA,molecular_subtype,0,562.0,53.88,1043.0,mrna,29995,1007,1007
+TCGA-BRCA,molecular_subtype,1,209.0,20.04,,dnam,200000,746,746
+TCGA-BRCA,molecular_subtype,2,190.0,18.22,,rppa,464,840,840
+TCGA-BRCA,molecular_subtype,3,82.0,7.86,,mirna,1601,978,978
+TCGA-BRCA,molecular_subtype,,,,,cnv,60265,1014,1014
+TCGA-LGG,molecular_subtype,1,241.0,52.74,457.0,mrna,22185,437,437
+TCGA-LGG,molecular_subtype,0,216.0,47.26,,dnam,321999,457,457
+TCGA-LGG,molecular_subtype,,,,,rppa,457,389,389
+TCGA-LGG,molecular_subtype,,,,,mirna,1515,408,408
+TCGA-LGG,molecular_subtype,,,,,cnv,60274,450,450
+TCGA-KIPAN,molecular_subtype,0,537.0,59.53,902.0,mrna,59427,822,822
+TCGA-KIPAN,molecular_subtype,1,291.0,32.26,,dnam,486426,542,542
+TCGA-KIPAN,molecular_subtype,2,74.0,8.2,,rppa,487,756,756
+TCGA-KIPAN,molecular_subtype,,,,,mirna,1881,811,811
+TCGA-KIPAN,molecular_subtype,,,,,cnv,59390,618,618

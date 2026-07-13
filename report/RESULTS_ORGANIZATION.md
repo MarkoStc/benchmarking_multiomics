@@ -103,24 +103,47 @@ metric or confusion matrix from scratch.
 
 ---
 
-## Layer 2 — tables and figures (Stage 2 output)
+## Layer 2 — the required output structure (Stage 2 output)
 
 **Produced by:** `report/aggregate.py` (reads all of `report/canonical/`, writes the
-deliverables). This is the only layer committed to git.
+deliverables). The layout is the **exact tree mandated by README §14**:
+
+```
+report/
+├── results/                         # machine-readable per-experiment CSVs
+│   ├── dataset_characteristics/     #   <DS>_characteristics.csv
+│   ├── predictions/                 #   per-dataset held-out predictions  (git-ignored, 2.8 GB)
+│   ├── fold_metrics/                #   all per-fold metrics, long form    (git-ignored, 39 MB)
+│   ├── aggregated_metrics/          #   main full-data performance
+│   ├── omic_combinations/           #   combination leaderboard (nomics axis)
+│   ├── patient_sweep/               #   npatients axis
+│   ├── missingness/                 #   missing axis
+│   ├── feature_sweep/               #   ratio axis
+│   ├── statistical_tests/           #   pairwise comparisons
+│   └── computational_cost/          #   runtimes
+├── figures/
+│   ├── main/                        # fig01,02,03,05,08,09,12,16 — each as .png AND .pdf
+│   └── supplementary/               # calibration, learning_curve_stability,
+│                                    #   missing_omic_identity, all_omic_combinations,
+│                                    #   all_metrics, computational_cost, feature_sensitivity
+└── tables/                          # table01 … table17 (exact §14 names), CSV
+```
+
+`results/predictions/` (2.8 GB) and `results/fold_metrics/` (39 MB) are the large,
+fully regenerable raw dumps — **git-ignored**; everything else here is committed.
 
 Aggregation follows README §3.4: average the 5 folds within a run, then average
 across the 3 seeds, reporting **mean ± SD** across seeds. Ranking and
 hyper-parameter selection use **balanced accuracy** (primary), with **macro-F1** as
-co-primary. Paired model comparisons use bootstrap confidence intervals + Wilcoxon
-signed-rank with Benjamini–Hochberg FDR correction.
+co-primary. Paired model comparisons (Table 16) use bootstrap confidence intervals +
+Wilcoxon signed-rank with Benjamini–Hochberg FDR correction.
 
-```
-report/tables/     # the README's numbered tables, as CSVs (small, committed)
-report/figures/    # the README's figures, as PNGs (committed)
-```
-
-Each table/figure filename maps to the corresponding numbered item in
-§14 of the evaluation README.
+**Two of the 17 tables are honest stubs**, because the experiment they require was
+not part of the four axes we ran: `table07_nested_combination_selection` (needs a
+nested inner-fold combination-selection protocol; the nomics axis instead evaluates
+every combination post-hoc — see `table06`) and `table12_per_omic_feature_sensitivity`
+(the feature-% axis is a *joint* all-omics sweep, not one-omic-at-a-time). Each stub
+CSV carries a `note` column stating exactly this.
 
 ---
 
