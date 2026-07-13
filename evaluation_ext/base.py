@@ -556,6 +556,10 @@ class FeatureSelectionSpec:
     # Choose ONE of the following:
     k_per_omic: Optional[int] = None
     ratio_per_omic: Optional[float] = None  # 0<ratio<=1
+    # Per-omic ratio override (README 9.3 one-omic-at-a-time sweep): maps omic ->
+    # ratio in (0,1]; omics absent from the dict keep ALL their features (100%).
+    # Takes precedence over k_per_omic / ratio_per_omic for the omics it names.
+    ratio_by_omic: Optional[Dict[str, float]] = None
     # Optional: remove near-constant features first
     variance_threshold: float = 0.0
 
@@ -648,7 +652,12 @@ class MultiOmicsFeatureSelector(BaseEstimator, TransformerMixin):
                 continue
 
             # Determine k for this omic
-            if self.spec.k_per_omic is not None:
+            if self.spec.ratio_by_omic is not None and omic in self.spec.ratio_by_omic:
+                k = max(1, int(np.floor(float(self.spec.ratio_by_omic[omic]) * len(cols_v))))
+            elif self.spec.ratio_by_omic is not None:
+                # per-omic sweep: omics not named keep all their features (100%)
+                k = len(cols_v)
+            elif self.spec.k_per_omic is not None:
                 k = int(self.spec.k_per_omic)
             elif self.spec.ratio_per_omic is not None:
                 k = max(1, int(np.floor(self.spec.ratio_per_omic * len(cols_v))))
@@ -1473,6 +1482,66 @@ class BaseModel(ABC):
             )
 
         return GridResult(results=results, axis_name="ratio_per_omic", axis_values=axis)
+
+
+    def evaluate_on_feature_ratio_one_omic(
+        self,
+        dataset: MultiOmicsDataset,
+        omics: Sequence[str],
+        target_omic: str,
+        ratios: Sequence[float],
+        selection_method: Literal["anova", "variance"] = "anova",
+        missing_policy: Literal["intersection", "impute"] = "impute",
+        include_non_intersection_frac: float = 0.0,
+        n_patients: Optional[int] = None,
+        variance_threshold: float = 0.0,
+        notes: Optional[str] = None,
+    ) -> GridResult:
+        """README 9.3 one-omic-at-a-time sweep: vary the retained feature ratio of
+        `target_omic` while keeping every other omic at 100% of its features."""
+        if target_omic not in set(omics):
+            raise ValueError(f"target_omic {target_omic!r} not in omics {list(omics)}")
+        axis = [float(r) for r in ratios]
+        results: Dict[float, ExperimentResult] = {}
+
+        cohort = dataset.build_cohort(
+            omics=omics,
+            include_non_intersection_frac=include_non_intersection_frac,
+            random_state=self.cv_spec.random_state,
+        )
+        if n_patients is not None:
+            cohort = _stratified_subsample_patient_ids(
+                dataset.y.loc[cohort], n=n_patients, random_state=self.cv_spec.random_state,
+            )
+
+        for r in axis:
+            fs = FeatureSelectionSpec(
+                method=selection_method,
+                k_per_omic=None,
+                ratio_per_omic=None,
+                ratio_by_omic={target_omic: float(r)},
+                variance_threshold=variance_threshold,
+            )
+            exp_spec = ExperimentSpec(
+                dataset_name=dataset.name,
+                omics=tuple(omics),
+                cv=self.cv_spec,
+                missingness=MissingnessSpec(
+                    missing_policy=missing_policy,
+                    include_non_intersection_frac=float(include_non_intersection_frac),
+                ),
+                feature_selection=fs,
+                n_patients=int(n_patients) if n_patients is not None else None,
+                notes=notes,
+            )
+            prepared = self.prepare_experiment_data(
+                dataset=dataset, omics=omics, patient_ids=cohort, missing_policy=missing_policy,
+            )
+            results[float(r)] = self._nested_cv_evaluate(
+                prepared, exp_spec, random_state=self.cv_spec.random_state,
+            )
+
+        return GridResult(results=results, axis_name=f"ratio_{target_omic}", axis_values=axis)
 
 
     def evaluate_on_n_patients(

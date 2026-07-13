@@ -1,0 +1,27 @@
+#!/bin/bash -l
+#SBATCH --job-name=submit-coherence
+#SBATCH --partition=academic
+#SBATCH --time=72:00:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --signal=B:USR1@180
+#SBATCH --output=logs/submit-coherence-%j.out
+#SBATCH --error=logs/submit-coherence-%j.err
+
+# Durable runner for the coherence-campaign submitter (blockmissing + per-omic).
+# Self-chains on USR1 ~180s before walltime to survive the 72h limit.
+set -u
+ROOT=/work/scitas-share/FellayMultiOmic/code/full-test-pipeline
+cd "$ROOT"
+
+requeue() {
+  echo "$(date) walltime approaching — resubmitting submit-coherence to continue"
+  sbatch "$ROOT/slurm_submit_daemon_coherence.sh"
+  exit 0
+}
+trap requeue USR1
+
+echo "$(date) submit-coherence SLURM job $SLURM_JOB_ID starting"
+bash "$ROOT/submit_daemon_coherence.sh" >> "$ROOT/submit_daemon_coherence.log" 2>&1 &
+wait $!
+echo "$(date) submit-coherence finished"
